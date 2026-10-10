@@ -34,6 +34,11 @@ function MovieDetails() {
         load();
     }, [id]);
 
+    useEffect(() => {
+        if (movie) document.title = `${movie.title} | Movie Wallah`
+        return () => { document.title = "Movie Wallah" }
+    }, [movie])
+
     if (loading) return <DetailsSkeleton />;
     if (error) return <div className="error-massage">{error}</div>;
     if (!movie) return null;

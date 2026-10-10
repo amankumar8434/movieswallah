@@ -6,7 +6,7 @@ function Footer() {
     return (
         <footer className="footer">
             <p>
-                Movies Wallet © {year} —{" "}
+                Movies Wallah © {year} —{" "}
                 <a
                     href="https://github.com/amankumar8434"
                     target="_blank"
@@ -14,6 +14,17 @@ function Footer() {
                 >
                     GitHub
                 </a>
+            </p>
+            <p className="tmdb-credit">
+                This product uses the TMDB API but is not endorsed or certified by{" "}
+                <a
+                    href="https://www.themoviedb.org/"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    TMDB
+                </a>
+                .
             </p>
         </footer>
     )
