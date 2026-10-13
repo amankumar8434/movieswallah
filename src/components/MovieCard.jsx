@@ -39,7 +39,16 @@ function MovieCard({ movie }) {
                 <h3>
                     <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
                 </h3>
-                <p>{movie.release_date?.split("-")[0]}</p>
+                <div className="movie-meta">
+                    <span className="movie-year">
+                        {movie.release_date?.split("-")[0]}
+                    </span>
+                    {movie.vote_average > 0 && (
+                        <span className="movie-rating">
+                            ⭐ {movie.vote_average.toFixed(1)}
+                        </span>
+                    )}
+                </div>
             </div>
         </div>
     )
