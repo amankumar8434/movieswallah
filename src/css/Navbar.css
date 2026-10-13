@@ -48,4 +48,8 @@
   .nav-link {
     padding: 0.5rem;
   }
+
+  .nav-home {
+    display: none;
+  }
 }
