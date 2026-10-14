@@ -7,6 +7,7 @@ import "../css/MovieDetails.css";
 
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 const BACKDROP_URL = "https://image.tmdb.org/t/p/w1280";
+const DOWNLOAD_URL = "https://vegamovies.gallery/search.html?q=";
 
 function MovieDetails() {
     const { id } = useParams();
@@ -16,6 +17,7 @@ function MovieDetails() {
     const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    // const [downloadUrl, setDownloadUrl] = useState(false);
 
     useEffect(() => {
         const load = async () => {
@@ -42,10 +44,13 @@ function MovieDetails() {
     if (loading) return <DetailsSkeleton />;
     if (error) return <div className="error-massage">{error}</div>;
     if (!movie) return null;
+    const downloadUrl =
+        DOWNLOAD_URL + encodeURIComponent(`${movie.title}`);
 
     const favorite = isFavorite(movie.id);
     const toggleFavorite = () =>
         favorite ? removeFromFavorites(movie.id) : addToFavorites(movie);
+
 
     const trailer = movie.videos?.results.find(
         (v) => v.site === "YouTube" && v.type === "Trailer"
@@ -53,6 +58,7 @@ function MovieDetails() {
     const cast = movie.credits?.cast.slice(0, 10) || [];
     const director = movie.credits?.crew.find((c) => c.job === "Director");
 
+    
     return (
         <div className="movie-details">
             {movie.backdrop_path && (
@@ -108,12 +114,22 @@ function MovieDetails() {
                         <p><strong>Director:</strong> {director.name}</p>
                     )}
 
-                    <button
-                        className={`details-fav-btn ${favorite ? "active" : ""}`}
-                        onClick={toggleFavorite}
-                    >
-                        {favorite ? "♥ Remove from favorites" : "♡ Add to favorites"}
-                    </button>
+                    <div className="details-actions">
+                        <button
+                            className={`details-fav-btn ${favorite ? "active" : ""}`}
+                            onClick={toggleFavorite}
+                        >
+                            {favorite ? "♥ Remove from favorites" : "♡ Add to favorites"}
+                        </button>
+
+                        <a href={downloadUrl}
+                            target="_blank" className="download-btn">
+                            <span className="download-icon" aria-hidden="true" />
+                            Download
+                        </a>
+                    </div>
+
+
                 </div>
             </div>
 

@@ -1,5 +1,6 @@
 .movie-details {
   position: relative;
+  isolation: isolate;
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 1rem;
@@ -7,6 +8,13 @@
   box-sizing: border-box;
   width: 100%;
   overflow-x: hidden;
+}
+
+.movie-details h1,
+.movie-details h2,
+.movie-details h3,
+.movie-details p {
+  color: #ffffff;
 }
 
 .details-backdrop {
@@ -50,8 +58,8 @@
 }
 
 .details-info h1 { margin: 0 0 0.5rem; font-size: 2.2rem; }
-.details-year { color: #999; font-weight: 400; }
-.details-tagline { color: #aaa; font-style: italic; margin-bottom: 1rem; }
+.movie-details .details-year { color: #999; font-weight: 400; }
+.movie-details .details-tagline { color: #aaa; font-style: italic; margin-bottom: 1rem; }
 
 .details-meta {
   display: flex;
@@ -75,8 +83,16 @@
   font-size: 0.85rem;
 }
 
-.details-fav-btn {
+/* ---------- Action buttons ---------- */
+
+.details-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   margin-top: 1rem;
+}
+
+.details-fav-btn {
   padding: 0.75rem 1.5rem;
   border-radius: 30px;
   color: white;
@@ -86,6 +102,57 @@
 }
 
 .details-fav-btn.active { background: #ff4757; }
+
+.watch-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  background-image: linear-gradient(to right, rgb(30, 213, 169), rgb(1, 180, 228));
+  transition: opacity 0.2s;
+}
+
+.watch-btn:hover { opacity: 0.85; }
+
+.download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgb(1, 180, 228);
+  border-radius: 30px;
+  background: transparent;
+  color: rgb(1, 180, 228);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.download-icon {
+  width: 18px;
+  height: 18px;
+  background-color: currentColor;
+  -webkit-mask: url("/download-icon.png") center / contain no-repeat;
+  mask: url("/download-icon.png") center / contain no-repeat;
+}
+
+.download-btn:hover {
+  background: rgb(1, 180, 228);
+  color: white;
+}
+
+.movie-details .download-notice {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: rgb(30, 213, 169);
+}
+
+
+/* ---------- Cast and trailer ---------- */
 
 .details-section { margin-top: 2.5rem; }
 
@@ -110,8 +177,8 @@
   justify-content: center;
 }
 
-.cast-name { margin: 0.5rem 0 0; font-size: 0.9rem; font-weight: 600; }
-.cast-character { margin: 0; font-size: 0.8rem; color: #999; }
+.movie-details .cast-name { margin: 0.5rem 0 0; font-size: 0.9rem; font-weight: 600; }
+.movie-details .cast-character { margin: 0; font-size: 0.8rem; color: #999; }
 
 .trailer-wrapper {
   position: relative;
@@ -163,7 +230,14 @@
     height: 120px;
   }
 
-  .details-fav-btn { width: 100%; }
+  .details-actions { flex-direction: column; }
+
+  .details-fav-btn,
+  .watch-btn,
+  .download-btn {
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
 /* Small phones */
